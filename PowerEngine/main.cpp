@@ -3,6 +3,9 @@
 
 #include "framework.h"
 #include "PowerEngine.h"
+#include "..\\BWEngine_Source\\MyApp.h"
+
+MyApp app;
 
 #define MAX_LOADSTRING 100
 
@@ -26,7 +29,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
-
+    app.test();
+    ///
+    //
+    // 
+    // 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_POWERENGINE, szWindowClass, MAX_LOADSTRING);
@@ -146,6 +153,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 255));
+            auto oldBrush = SelectObject(hdc, brush);
+            Rectangle(hdc, 100, 100, 200,200);
+
+            SelectObject(hdc, oldBrush);
+            DeleteObject(brush);
+            Ellipse(hdc, 200, 200, 300, 300);
+
+            auto grayBrush = GetStockObject(GRAY_BRUSH);
+            oldBrush = SelectObject(hdc, grayBrush);
+            Rectangle(hdc, 400, 400, 500, 500);
+            SelectObject(hdc, oldBrush);
             // TODO: Add any drawing code that uses hdc here...
             EndPaint(hWnd, &ps);
         }
