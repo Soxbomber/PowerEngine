@@ -1,7 +1,23 @@
 #pragma once
-class MyApp
+#include "GameObject.h"
+namespace ya
 {
-public:
-	void test();
-};
+	class MyApp
+	{
+	public:
+		MyApp();
+		~MyApp();
+		void Initialize(HWND hwnd);
+		void Run();
+
+		void Update();
+		void LateUpdate();
+		void Render();
+
+	private:
+		HWND mHwnd;
+		HDC mHdc;
+		GameObject mPlayer;
+	};
+}
 

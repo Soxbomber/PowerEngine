@@ -5,7 +5,7 @@
 #include "PowerEngine.h"
 #include "..\\BWEngine_Source\\MyApp.h"
 
-MyApp app;
+ya::MyApp application;
 
 #define MAX_LOADSTRING 100
 
@@ -28,12 +28,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: Place code here.
-    app.test();
-    ///
-    //
-    // 
-    // 
+
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_POWERENGINE, szWindowClass, MAX_LOADSTRING);
@@ -49,15 +44,34 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // Main message loop:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (msg.message == WM_QUIT)
+                break;
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            application.Run();
         }
     }
+
+    // Main message loop:
+    //while (GetMessage(&msg, nullptr, 0, 0))
+    //{
+    //    if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+    //    {
+    //        TranslateMessage(&msg);
+    //        DispatchMessage(&msg);
+    //    }
+    //}
 
     return (int) msg.wParam;
 }
@@ -111,6 +125,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    {
       return FALSE;
    }
+   application.Initialize(hWnd);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
@@ -153,19 +168,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 255));
-            auto oldBrush = SelectObject(hdc, brush);
-            Rectangle(hdc, 100, 100, 200,200);
-
-            SelectObject(hdc, oldBrush);
-            DeleteObject(brush);
-            Ellipse(hdc, 200, 200, 300, 300);
-
-            auto grayBrush = GetStockObject(GRAY_BRUSH);
-            oldBrush = SelectObject(hdc, grayBrush);
-            Rectangle(hdc, 400, 400, 500, 500);
-            SelectObject(hdc, oldBrush);
-            // TODO: Add any drawing code that uses hdc here...
             EndPaint(hWnd, &ps);
         }
         break;
