@@ -1,5 +1,6 @@
 #include "MyApp.h"
 #include "Input.h"
+#include "Time.h"
 
 namespace ya
 {
@@ -20,6 +21,7 @@ namespace ya
 		mHdc = GetDC(hwnd); 
 		mPlayer.SetPosition(0,0);
 		Input::Initialize();
+		Time::Initialize();
 	}
 
 	void MyApp::Run()
@@ -31,6 +33,7 @@ namespace ya
 
 	void MyApp::Update()
 	{
+		Time::Update();
 		Input::Update();
 		mPlayer.Update();
 	}
@@ -40,6 +43,7 @@ namespace ya
 	}
 	void MyApp::Render()
 	{
+		Time::Render(mHdc);
 		mPlayer.Render(mHdc);
 	}
 }
