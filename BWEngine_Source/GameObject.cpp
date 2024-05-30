@@ -1,10 +1,12 @@
 #include "GameObject.h"
 #include "Input.h"
-#include "Time.h"
+#include "FrameTime.h"
 
 namespace ya
 {
 	GameObject::GameObject()
+		: mX(0)
+		, mY(0)
 	{
 
 	}

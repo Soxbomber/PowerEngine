@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "PowerEngine.h"
 #include "..\\BWEngine_Source\\MyApp.h"
+#include "..\\BWEngine_Window\\LoadScenes.h"
 
 ya::MyApp application;
 
@@ -132,7 +133,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
+   ya::LoadScenes();
    return TRUE;
 }
 
