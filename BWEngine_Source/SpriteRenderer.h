@@ -1,13 +1,14 @@
 #pragma once
-#include "Scene.h"
+#include "CommonInclude.h"
+#include "Component.h"
 
 namespace ya
 {
-	class PlayScene : public Scene
+	class SpriteRenderer : public Component
 	{
 	public:
-		PlayScene();
-		~PlayScene();
+		SpriteRenderer();
+		~SpriteRenderer();
 
 		void Initialize() override;
 		void Update() override;

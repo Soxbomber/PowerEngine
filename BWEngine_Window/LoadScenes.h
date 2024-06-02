@@ -1,7 +1,8 @@
 #pragma once
 #include "PlayScene.h"
 //#include "SceneManager.h"
-#include "..\\BWEngine_Source\\SceneManager.h"
+#include "SceneManager.h"
+
 
 namespace ya
 {

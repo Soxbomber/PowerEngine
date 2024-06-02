@@ -1,5 +1,4 @@
 #pragma once
-#include "CommonInclude.h"
 #include "Entity.h"
 #include "GameObject.h"
 

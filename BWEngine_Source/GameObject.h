@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonInclude.h"
+#include "Component.h"
 
 namespace ya
 {
@@ -8,30 +9,36 @@ namespace ya
 	public:
 		GameObject();
 		~GameObject();
-		void Update();
-		void LateUpdate();
-		void Render(HDC hdc);
 
-		void SetPosition(float x, float y)
+		virtual void Initialize();
+		virtual void Update();
+		virtual void LateUpdate();
+		virtual void Render(HDC hdc);
+
+		template <typename T>
+		T* AddComponent()
 		{
-			mX = x;
-			mY = y;
+			T* comp = new T();
+			comp->SetOwner(this);
+			mComponents.push_back(comp);
+			return comp;
 		}
 
-		float GetPositionX()
+		template <typename T>
+		T* GetComponent()
 		{
-			return mX;
-		}
-
-		float GetPositionY()
-		{
-			return mY;
+			T* component = nullptr;
+			for (Component* comp : mComponents)
+			{
+				component = dynamic_cast<T*>(comp);
+				if (component)
+					break;
+			}
+			return component;
 		}
 
 	private:
-		float mX;
-		float mY;
-		//HDC mHdc;
+		std::vector<Component*> mComponents;
 	};
 }
 

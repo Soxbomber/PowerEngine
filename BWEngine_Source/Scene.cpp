@@ -13,6 +13,7 @@ namespace ya
 	void Scene::Initialize()
 	{
 	}
+
 	void Scene::Update()
 	{
 		for (GameObject* gameObj : mGameObjects)
