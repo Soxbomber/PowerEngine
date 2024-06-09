@@ -23,5 +23,22 @@ namespace ya
 	{
 		mActiveScene->Render(hdc);
 	}
+
+	Scene* SceneManager::LoadScene(const std::wstring& name)
+	{
+		if (mActiveScene)
+			mActiveScene->OnExit();
+
+		std::map<std::wstring, Scene*>::iterator iter
+			= mScene.find(name);
+
+		if (iter == mScene.end())
+			return nullptr;
+
+		mActiveScene = iter->second;
+		mActiveScene->OnEnter();
+
+		return iter->second;
+	}
 }
 

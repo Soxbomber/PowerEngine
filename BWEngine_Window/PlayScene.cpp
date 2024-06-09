@@ -13,6 +13,7 @@
 #include "..//BWEngine_Source//SpriteRenderer.h"
 #include "..//BWEngine_Source//Input.h"
 #include "..//BWEngine_Source//SceneManager.h"
+#include "..//BWEngine_Source//Object.h"
 
 
 namespace ya
@@ -29,15 +30,19 @@ namespace ya
 	void PlayScene::Initialize()
 	{
 		{
-			bg = new Player();
-			Transform* tr = bg->AddComponent<Transform>();
-			tr->SetPos(Vector2(0, 0));
-			tr->SetName(L"TR");
+			//bg = new Player();
+			//Transform* tr = bg->AddComponent<Transform>();
+			//tr->SetPosition(Vector2(0, 0));
+			//tr->SetName(L"TR");
 
+			//SpriteRenderer* sr = bg->AddComponent<SpriteRenderer>();
+			//sr->SetName(L"SR");
+			//sr->ImageLoad(L"C:\\Users\\kaget\\Desktop\\GameEngine\\PowerEngine\\Resources\\CloudOcean.png");
+			//AddGameObject(bg, enums::eLayerType::BackGround);
+			bg = object::Instantiate<Player>(enums::eLayerType::BackGround, Vector2(100.0f, 100.0f));
 			SpriteRenderer* sr = bg->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-			sr->ImageLoad(L"C:\\Users\\kaget\\Desktop\\GameEngine\\PowerEngine\\Resources\\CloudOcean.png");
-			AddGameObject(bg, eLayerType::BackGround);
+			sr->ImageLoad(L"..\\Resources\\CloudOcean.png");
+			//AddGameObject(bg, enums::eLayerType::BackGround);
 		}
 	}
 	void PlayScene::Update()
@@ -65,7 +70,7 @@ namespace ya
 	void PlayScene::OnExit()
 	{
 		//bg = new Player();
-		Transform* tr = bg->GetComponent<Transform>();
-		tr->SetPos(Vector2(0, 0));
+		//Transform* tr = bg->GetComponent<Transform>();
+		//tr->SetPosition(Vector2(0, 0));
 	}
 }

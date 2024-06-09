@@ -20,7 +20,7 @@ namespace ya
 		~Layer();
 
 	private:
-		eLayerType mType;
+		enums::eLayerType mType;
 		std::vector<GameObject*> mGameObjects;
 	};
 }

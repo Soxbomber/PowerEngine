@@ -1,11 +1,13 @@
 #include "GameObject.h"
 #include "Input.h"
 #include "FrameTime.h"
+#include "Transform.h"
 
 namespace ya
 {
 	GameObject::GameObject()
 	{
+		initializeTransform();
 	}
 
 	GameObject::~GameObject()
@@ -47,6 +49,11 @@ namespace ya
 		{
 			comp->Render(hdc);
 		}
+	}
+
+	void GameObject::initializeTransform()
+	{
+		AddComponent<Transform>();
 	}
 
 }
