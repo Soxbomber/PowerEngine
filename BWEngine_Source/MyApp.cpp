@@ -47,7 +47,7 @@ namespace ya
 	}
 	void MyApp::LateUpdate()
 	{
-
+		SceneManager::LateUpdate();
 	}
 	void MyApp::Render()
 	{

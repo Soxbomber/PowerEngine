@@ -3,8 +3,6 @@
 namespace ya
 {
 	Transform::Transform()
-		: mX(0)
-		, mY(0)
 	{
 	}
 	Transform::~Transform()

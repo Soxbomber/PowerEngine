@@ -1,12 +1,24 @@
 #include "PlayScene.h"
-#include "GameObject.h"
-#include "Player.h"
-#include "Transform.h"
-#include "SpriteRenderer.h"
+//#include "GameObject.h"
+//#include "Player.h"
+//#include "Transform.h"
+//#include "SpriteRenderer.h"
+//#include "Input.h"
+#include "PlayScene.h"
+#include "Layer.h"
+//#include "SceneManager.h"
+#include "..//BWEngine_Source//GameObject.h"
+//#include "..//BWEngine_Source//Player.h"
+#include "..//BWEngine_Source//Transform.h"
+#include "..//BWEngine_Source//SpriteRenderer.h"
+#include "..//BWEngine_Source//Input.h"
+#include "..//BWEngine_Source//SceneManager.h"
+
 
 namespace ya
 {
 	PlayScene::PlayScene()
+		//: bg(nullptr)
 	{
 	}
 
@@ -16,45 +28,17 @@ namespace ya
 
 	void PlayScene::Initialize()
 	{
-		//for (size_t i = 0; i < 100; i++)
-		//{
-		//	GameObject* obj = new GameObject();
-		//	obj->SetPosition(rand() % 1280, rand() % 720);
-		//	AddGameObject(obj);
-		//}
 		{
-			Player* pl = new Player();
-			Transform* tr = pl->AddComponent<Transform>();
-			tr->SetPos(300, 450);
+			bg = new Player();
+			Transform* tr = bg->AddComponent<Transform>();
+			tr->SetPos(Vector2(0, 0));
 			tr->SetName(L"TR");
 
-			SpriteRenderer* sr = pl->AddComponent<SpriteRenderer>();
+			SpriteRenderer* sr = bg->AddComponent<SpriteRenderer>();
 			sr->SetName(L"SR");
-			AddGameObject(pl);
+			sr->ImageLoad(L"C:\\Users\\kaget\\Desktop\\GameEngine\\PowerEngine\\Resources\\CloudOcean.png");
+			AddGameObject(bg, eLayerType::BackGround);
 		}
-
-		{
-			Player* pl = new Player();
-			Transform* tr = pl->AddComponent<Transform>();
-			tr->SetPos(800, 450);
-			tr->SetName(L"TR");
-
-			SpriteRenderer* sr = pl->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-			AddGameObject(pl);
-		}
-
-		{
-			Player* pl = new Player();
-			Transform* tr = pl->AddComponent<Transform>();
-			tr->SetPos(100, 650);
-			tr->SetName(L"TR");
-
-			SpriteRenderer* sr = pl->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-			AddGameObject(pl);
-		}
-
 	}
 	void PlayScene::Update()
 	{
@@ -63,9 +47,25 @@ namespace ya
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
+		if (Input::GetKeyDown(eKeyCode::N))
+		{
+			SceneManager::LoadScene(L"TitleScene");
+		}
 	}
 	void PlayScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
+		wchar_t str[50] = L"Play Scene";
+		TextOut(hdc, 0, 0, str, 10);
+	}
+	void PlayScene::OnEnter()
+	{
+	}
+
+	void PlayScene::OnExit()
+	{
+		//bg = new Player();
+		Transform* tr = bg->GetComponent<Transform>();
+		tr->SetPos(Vector2(0, 0));
 	}
 }

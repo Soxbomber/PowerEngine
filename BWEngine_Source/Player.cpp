@@ -1,4 +1,7 @@
 #include "Player.h"
+#include "Input.h"
+#include "Transform.h"
+#include "FrameTime.h"
 
 namespace ya
 {
@@ -13,6 +16,13 @@ namespace ya
 	void Player::LateUpdate()
 	{
 		GameObject::LateUpdate();
+		if (Input::GetKey(eKeyCode::RIGHT))
+		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 pos = tr->GetPosition();
+			pos.x += 100.0f * Time::DeltaTime();
+			tr->SetPos(pos);
+		}
 	}
 	void Player::Render(HDC hdc)
 	{

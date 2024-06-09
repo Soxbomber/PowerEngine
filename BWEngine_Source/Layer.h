@@ -1,28 +1,26 @@
 #pragma once
+#include "CommonInclude.h"
 #include "Entity.h"
 #include "GameObject.h"
-#include "Layer.h"
+
 
 namespace ya
 {
-	class Scene : public Entity
+	class Layer : public Entity
 	{
 	public:
-		Scene();
-		~Scene();
 
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
-		virtual void OnEnter();
-		virtual void OnExit();
+		void AddGameObject(GameObject* gameObject);
 
-		void AddGameObject(GameObject* gameObject, eLayerType type);
+		Layer();
+		~Layer();
 
 	private:
-		std::vector<Layer*> mLayers;
+		eLayerType mType;
+		std::vector<GameObject*> mGameObjects;
 	};
 }
-
-
